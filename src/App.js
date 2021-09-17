@@ -1,6 +1,12 @@
-function App() {
+import {Navbar} from "./Components/Navbar"
+import {Form} from "./Components/Form";
+
+const App = () => {
   return (
-        <h1>Hello World</h1>
+      <>
+        <Navbar/>
+          <Form/>
+      </>
   );
 }
 
