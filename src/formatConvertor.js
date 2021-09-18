@@ -4,7 +4,7 @@ const arrayUp = (arr) => {
 
 const decimalToBinaryConvertor = (number) => {
   let decimalDigitsAsArrays = [];
-  base = 2;
+  const base = 2;
   while (number > 0) {
     decimalDigitsAsArrays.push(number % base);
     number = Math.floor(number / base);
@@ -15,23 +15,23 @@ const decimalToBinaryConvertor = (number) => {
 
 const decimalToHexConvertor = (number) => {
   const hexDigits = [];
-  base = 16;
-  while (number != 0) {
+  const base = 16;
+  while (number !== 0) {
     hexDigits.push(number % base);
     number = Math.floor(number / base);
   }
   for (let i = 0; i < hexDigits.length; i++) {
-    if (hexDigits[i] == 10) {
+    if (hexDigits[i] === 10) {
       hexDigits[i] = "A";
-    } else if (hexDigits[i] == 11) {
+    } else if (hexDigits[i] === 11) {
       hexDigits[i] = "B";
-    } else if (hexDigits[i] == 12) {
+    } else if (hexDigits[i] === 12) {
       hexDigits[i] = "C";
-    } else if (hexDigits[i] == 13) {
+    } else if (hexDigits[i] === 13) {
       hexDigits[i] = "D";
-    } else if (hexDigits[i] == 14) {
+    } else if (hexDigits[i] === 14) {
       hexDigits[i] = "E";
-    } else if (hexDigits[i] == 15) {
+    } else if (hexDigits[i] === 15) {
       hexDigits[i] = "F";
     }
   }
@@ -41,8 +41,8 @@ const decimalToHexConvertor = (number) => {
 
 const decimalToOctalConvertor = (number) => {
   const octalDigits = [];
-  base = 8;
-  while (number != 0) {
+  const base = 8;
+  while (number !== 0) {
     octalDigits.push(number % base);
     number = Math.floor(number / base);
   }
@@ -50,4 +50,17 @@ const decimalToOctalConvertor = (number) => {
   return arrayUp(octalDigits);
 };
 
-console.log(decimalToOctalConvertor(345678));
+const binaryToDecimalConvertor = (number)=>{
+  let decimalNumber = 0
+  const base = 2
+  const binaryDigitsAsArray = number.split("").map(number => {
+    return Number(number)
+  })
+  binaryDigitsAsArray.reverse()
+  for(let i=0; i<binaryDigitsAsArray.length;i++){
+    decimalNumber += binaryDigitsAsArray[i] * base ** i
+  }
+  return decimalNumber
+}
+
+console.log(binaryToDecimalConvertor("1000111100101100110010"))
