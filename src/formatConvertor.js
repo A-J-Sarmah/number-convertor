@@ -2,7 +2,7 @@ const arrayUp = (arr) => {
   return arr.join("").toString();
 };
 
-const decimalToBinaryConvertor = (number) => {
+export const decimalToBinaryConvertor = (number) => {
   let decimalDigitsAsArrays = [];
   const base = 2;
   while (number > 0) {
@@ -13,7 +13,7 @@ const decimalToBinaryConvertor = (number) => {
   return arrayUp(decimalDigitsAsArrays);
 };
 
-const decimalToHexConvertor = (number) => {
+export const decimalToHexConvertor = (number) => {
   const hexDigits = [];
   const base = 16;
   while (number !== 0) {
@@ -39,7 +39,7 @@ const decimalToHexConvertor = (number) => {
   return arrayUp(hexDigits);
 };
 
-const decimalToOctalConvertor = (number) => {
+export const decimalToOctalConvertor = (number) => {
   const octalDigits = [];
   const base = 8;
   while (number !== 0) {
@@ -50,17 +50,55 @@ const decimalToOctalConvertor = (number) => {
   return arrayUp(octalDigits);
 };
 
-const binaryToDecimalConvertor = (number)=>{
-  let decimalNumber = 0
-  const base = 2
-  const binaryDigitsAsArray = number.split("").map(number => {
-    return Number(number)
-  })
-  binaryDigitsAsArray.reverse()
-  for(let i=0; i<binaryDigitsAsArray.length;i++){
-    decimalNumber += binaryDigitsAsArray[i] * base ** i
+export const binaryToDecimalConvertor = (number) => {
+  let decimalNumber = 0;
+  const base = 2;
+  const binaryDigitsAsArray = number.split("").map((number) => {
+    return Number(number);
+  });
+  binaryDigitsAsArray.reverse();
+  for (let i = 0; i < binaryDigitsAsArray.length; i++) {
+    decimalNumber += binaryDigitsAsArray[i] * base ** i;
   }
-  return decimalNumber
-}
+  return decimalNumber;
+};
 
-console.log(binaryToDecimalConvertor("1000111100101100110010"))
+export const hexToDecimalConvertor = (number) => {
+  let decimalNumber = 0;
+  const base = 16;
+  const hexDigitsAsArray = number.split("").map((num) => {
+    if (num === "A") {
+      return 10;
+    } else if (num === "B") {
+      return 11;
+    } else if (num === "C") {
+      return 12;
+    } else if (num === "D") {
+      return 13;
+    } else if (num === "E") {
+      return 14;
+    } else if (num === "F") {
+      return 15;
+    } else {
+      return Number(num);
+    }
+  });
+  hexDigitsAsArray.reverse();
+  for (let i = 0; i < hexDigitsAsArray.length; i++) {
+    decimalNumber += hexDigitsAsArray[i] * base ** i;
+  }
+  return decimalNumber;
+};
+
+export const octalToDecimalConvertor = (number) => {
+  let decimalNumber = 0;
+  const base = 8;
+  const octalDigitsAsArray = number.split("").map((number) => {
+    return Number(number);
+  });
+  octalDigitsAsArray.reverse();
+  for (let i = 0; i < octalDigitsAsArray.length; i++) {
+    decimalNumber += octalDigitsAsArray[i] * base ** i;
+  }
+  return decimalNumber;
+};
