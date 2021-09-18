@@ -60,7 +60,7 @@ export const binaryToDecimalConvertor = (number) => {
   for (let i = 0; i < binaryDigitsAsArray.length; i++) {
     decimalNumber += binaryDigitsAsArray[i] * base ** i;
   }
-  return decimalNumber;
+  return decimalNumber.toString();
 };
 
 export const hexToDecimalConvertor = (number) => {
@@ -87,7 +87,7 @@ export const hexToDecimalConvertor = (number) => {
   for (let i = 0; i < hexDigitsAsArray.length; i++) {
     decimalNumber += hexDigitsAsArray[i] * base ** i;
   }
-  return decimalNumber;
+  return decimalNumber.toString();
 };
 
 export const octalToDecimalConvertor = (number) => {
@@ -100,5 +100,5 @@ export const octalToDecimalConvertor = (number) => {
   for (let i = 0; i < octalDigitsAsArray.length; i++) {
     decimalNumber += octalDigitsAsArray[i] * base ** i;
   }
-  return decimalNumber;
+  return decimalNumber.toString();
 };
