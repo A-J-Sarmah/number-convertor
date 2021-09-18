@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import {
   decimalToBinaryConvertor,
-  decimalToHexConverotr,
+  decimalToHexConvertor,
   decimalToOctalConvertor,
   hexToDecimalConvertor,
   binaryToDecimalConvertor,
@@ -15,7 +15,7 @@ const calculations = (state = "0", action) => {
     case "NULL":
       return 0;
     case "DECIMAL_TO_HEX":
-      return decimalToHexConverotr(parseInt(action.number));
+      return decimalToHexConvertor(parseInt(action.number));
     case "DECIMAL_TO_BINARY":
       return decimalToBinaryConvertor(parseInt(action.number));
     case "DECIMAL_TO_OCTAL":
@@ -32,7 +32,7 @@ const calculations = (state = "0", action) => {
 };
 
 const format = (
-  state = { from: "DECIMAL", to: "BINARY", isValid: true },
+  state = { from: "decimal", to: "binary", isValid: true },
   action
 ) => {
   switch (action.type) {
@@ -41,7 +41,7 @@ const format = (
     case "CHANGE_IN_FORMAT_TO":
       return { ...state, to: action.to };
     case "CHANGE_IN_VALIDITY":
-      return { ...state, isValid: !isValid };
+      return { ...state, isValid: !this.isValid };
     default:
       return { ...state };
   }
