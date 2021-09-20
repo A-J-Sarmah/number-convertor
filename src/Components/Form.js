@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 export let Form = ({ state, dispatch }) => {
   let from;
   let to;
+  let value;
   const changeFormat = (field) => {
     if (from.value == to.value) {
       from.value = "decimal";
@@ -12,6 +13,16 @@ export let Form = ({ state, dispatch }) => {
       dispatch({ type: "CHANGE_IN_FORMAT_FORM", from: from.value });
     } else if (field === "to") {
       dispatch({ type: "CHANGE_IN_FORMAT_TO", to: to.value });
+    }
+  };
+  const executeConversion = (number) => {
+    const arrayOfTheNumber = number.split("");
+    if (state.from === binary) {
+      arrayOfTheNumber.map((num) => {
+        if (Number(num) !== 0 || Number(num) !== 1) {
+          value.value = "";
+        }
+      });
     }
   };
   return (
@@ -27,6 +38,7 @@ export let Form = ({ state, dispatch }) => {
             className="w-100"
             id="amount"
             placeholder="Enter the number"
+            ref={(node) => (value = node)}
           />
         </div>
         <div className="col-xl-4 col-6 d-flex justify-content-center">

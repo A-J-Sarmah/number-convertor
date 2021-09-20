@@ -40,8 +40,6 @@ const format = (
       return { ...state, from: action.from };
     case "CHANGE_IN_FORMAT_TO":
       return { ...state, to: action.to };
-    case "CHANGE_IN_VALIDITY":
-      return { ...state, isValid: !this.isValid };
     default:
       return { ...state };
   }
