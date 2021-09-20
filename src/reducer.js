@@ -8,7 +8,9 @@ import {
   octalToDecimalConvertor,
 } from "./formatConvertor";
 
+
 const calculations = (state = "0", action) => {
+  let number
   switch (action.type) {
     case "CHANGE":
       return action.number;
@@ -26,13 +28,31 @@ const calculations = (state = "0", action) => {
       return binaryToDecimalConvertor(action.number);
     case "OCTAL_TO_DECIMAL":
       return octalToDecimalConvertor(action.number);
+    case "BINARY_TO_OCTAL":
+      number = binaryToDecimalConvertor(action.number)
+      return decimalToOctalConvertor(parseInt(number))
+    case "BINARY_TO_HEX":
+      number = binaryToDecimalConvertor(action.number)
+      return decimalToHexConvertor(parseInt(number))
+    case "OCTAL_TO_BINARY":
+      number = octalToDecimalConvertor(action.number)
+      return decimalToBinaryConvertor(parseInt(number))
+    case "OCTAL_TO_HEX":
+      number = octalToDecimalConvertor(action.number)
+      return decimalToHexConvertor(parseInt(number))
+    case "HEX_TO_BINARY":
+      number = hexToDecimalConvertor(action.number)
+      return decimalToBinaryConvertor(parseInt(number))
+    case "HEX_TO_OCTAL":
+      number = hexToDecimalConvertor(action.number)
+      return decimalToOctalConvertor(parseInt(number))
     default:
       return 0;
   }
 };
 
 const format = (
-  state = { from: "decimal", to: "binary", isValid: true },
+  state = { from: "decimal", to: "binary" },
   action
 ) => {
   switch (action.type) {

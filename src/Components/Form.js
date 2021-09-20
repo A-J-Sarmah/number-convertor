@@ -5,7 +5,7 @@ export let Form = ({ state, dispatch }) => {
   let to;
   let value;
   const changeFormat = (field) => {
-    if (from.value == to.value) {
+    if (from.value === to.value) {
       from.value = "decimal";
       to.value = "binary";
     }
@@ -17,12 +17,87 @@ export let Form = ({ state, dispatch }) => {
   };
   const executeConversion = (number) => {
     const arrayOfTheNumber = number.split("");
-    if (state.from === binary) {
-      arrayOfTheNumber.map((num) => {
-        if (Number(num) !== 0 || Number(num) !== 1) {
+    let isValid = true
+    //for binary
+    if (state.format.from === "binary") {
+      arrayOfTheNumber.forEach((num) => {
+        if (Number(num) !== 0 && Number(num) !== 1) {
           value.value = "";
+          isValid = false
         }
       });
+      if(isValid){
+        if(state.format.to === "decimal"){
+          dispatch({type:"BINARY_TO_DECIMAL", number:String(number)})
+        }
+        else if(state.format.to === "octal"){
+          dispatch({type:"BINARY_TO_OCTAL",number:String(number)})
+        }
+        else if(state.format.to === "hex"){
+          dispatch({type:"BINARY_TO_HEX",number:String(number)})
+        }
+      }
+    }
+    //for decimal
+    if(state.format.from === "decimal"){
+      arrayOfTheNumber.forEach((num) => {
+        if (Number(num) !== 0 && Number(num) !== 1 && Number(num) !==2 && Number(num) !== 3 && Number(num) !== 4 && Number(num) !== 5 && Number(num) !== 6 && Number(num) !== 7 && Number(num) !== 8 && Number(num)!== 9) {
+          value.value = "";
+          isValid = false
+          console.log(Number(num))
+        }
+      });
+      if(isValid){
+        if(state.format.to === "binary"){
+          dispatch({type:"DECIMAL_TO_BINARY", number:String(number)})
+        }
+        else if(state.format.to === "octal"){
+          dispatch({type:"DECIMAL_TO_OCTAL",number:String(number)})
+        }
+        else if(state.format.to === "hex"){
+          dispatch({type:"DECIMAL_TO_HEX",number:String(number)})
+        }
+      }
+    }
+    //for octal
+    if(state.format.from === "octal"){
+      arrayOfTheNumber.forEach((num) => {
+        if (Number(num) !== 0 && Number(num) !== 1 && Number(num) !==2 && Number(num) !== 3 && Number(num) !== 4 && Number(num) !== 5 && Number(num) !== 6 && Number(num) !== 7 ) {
+          value.value = "";
+          isValid = false
+        }
+      });
+      if(isValid){
+        if(state.format.to === "binary"){
+          dispatch({type:"OCTAL_TO_BINARY", number:String(number)})
+        }
+        else if(state.format.to === "decimal"){
+          dispatch({type:"OCTAL_TO_DECIMAL",number:String(number)})
+        }
+        else if(state.format.to === "hex"){
+          dispatch({type:"OCTAL_TO_HEX",number:String(number)})
+        }
+      }
+    }
+    // for hex
+    if(state.format.from === "hex"){
+      arrayOfTheNumber.forEach((num) => {
+        if (Number(num) !== 0 && Number(num) !== 1 && Number(num) !==2 && Number(num) !== 3 && Number(num) !== 4 && Number(num) !== 5 && Number(num) !== 6 && Number(num) !== 7 && Number(num) !== 8 && Number(num) !== 9 && num !== "A" && num !=="B" && num !== "C" && num !== "D" && num!== "E" && num !=="F") {
+          value.value = "";
+          isValid = false
+        }
+      });
+      if(isValid){
+        if(state.format.to === "binary"){
+          dispatch({type:"HEX_TO_BINARY", number:String(number)})
+        }
+        else if(state.format.to === "decimal"){
+          dispatch({type:"HEX_TO_DECIMAL",number:String(number)})
+        }
+        else if(state.format.to === "octal"){
+          dispatch({type:"HEX_TO_OCTAL",number:String(number)})
+        }
+      }
     }
   };
   return (
@@ -42,7 +117,9 @@ export let Form = ({ state, dispatch }) => {
           />
         </div>
         <div className="col-xl-4 col-6 d-flex justify-content-center">
-          <button className="btn btn-warning py-0 mt-3">Calculate</button>
+          <button className="btn btn-warning py-0 mt-3" onClick={()=>{
+            executeConversion(value.value)
+          }}>Calculate</button>
         </div>
       </div>
       <div className="row justify-content-center mb-5">
@@ -83,4 +160,8 @@ export let Form = ({ state, dispatch }) => {
   );
 };
 
-Form = connect()(Form);
+const mapStateToProps = (state) => {
+  return { state };
+};
+
+Form = connect(mapStateToProps)(Form);
