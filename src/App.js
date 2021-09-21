@@ -6,8 +6,8 @@ const App = () => {
   return (
       <>
         <Navbar/>
-          <Form/>
-          <Result/>
+        <Form/>
+        <Result/>
       </>
   );
 }
