@@ -7,21 +7,19 @@ export let Form = ({ state, dispatch }) => {
   const changeFormat = (field) => {
     if (from.value === to.value) {
       let array = ["decimal", "binary", "octal", "hex"];
-      if (state.format.from === to.value) {
-        to.value = state.format.from;
-        array = array.filter((element) => element !== state.format.from);
-        from.value = array[Math.floor(Math.random() * array.length)];
-      } else if (state.format.to === from.value) {
-        from.value = state.format.to;
-        array = array.filter((element) => element !== state.format.to);
+      if (field === "from") {
+        array = array.filter((element) => element !== from.value);
         to.value = array[Math.floor(Math.random() * array.length)];
+      } else if (field === "to") {
+        array = array.filter((element) => element !== to.value);
+        from.value = array[Math.floor(Math.random() * array.length)];
       }
     }
-    if (field === "from") {
-      dispatch({ type: "CHANGE_IN_FORMAT_FORM", from: from.value });
-    } else if (field === "to") {
-      dispatch({ type: "CHANGE_IN_FORMAT_TO", to: to.value });
-    }
+    dispatch({
+      type: "CHANGE_IN_FORMAT",
+      from: from.value,
+      to: to.value,
+    });
   };
   const executeConversion = (number) => {
     const arrayOfTheNumber = number.split("");
